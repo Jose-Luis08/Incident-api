@@ -1,5 +1,6 @@
 import { IncidentModel } from "../../src/data/model/incident.model";
 import {Request, Response}  from "express"
+import { EmailService } from "../../src/Domain/Service/email.service";
 
 export class IncidentController{
 
@@ -21,7 +22,13 @@ export class IncidentController{
             const {title, description, lat, lng} = req.body;
             const newIncident = await IncidentModel.create({
                 title, description, lat, lng});
-    
+
+            const emailService = new EmailService();
+            await emailService.sendEmail({
+                to:"joseluis.reyeschavez@gmail.com",
+                subject: title,
+                htmlBody: `<h1>${description}<h1>`
+            });
             return res.json(newIncident);
         }
         catch (error) {
