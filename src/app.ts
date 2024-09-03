@@ -3,6 +3,7 @@ import { envs } from "./config/envs";
 import { MongoDatabase } from "./data/model/init";
 import { IncidentModel } from "./data/model/incident.model";
 import { AppRoutes } from "../presentacion/inicidents/routes";
+import { emailJob } from "./Domain/Jobs/email.job";
 
 console.log(envs.PORT)
 
@@ -51,5 +52,6 @@ app.post('/', async (req:Request, res:Response) => {
 
 */
 app.listen(envs.PORT, ()=>{
-    console.log("Server running on port 3000")
+    console.log("Server running on port 3000");
+    emailJob();
 })

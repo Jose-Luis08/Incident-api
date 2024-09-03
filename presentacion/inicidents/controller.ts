@@ -23,12 +23,12 @@ export class IncidentController{
             const newIncident = await IncidentModel.create({
                 title, description, lat, lng});
 
-            const emailService = new EmailService();
-            await emailService.sendEmail({
-                to:"joseluis.reyeschavez@gmail.com",
-                subject: title,
-                htmlBody: `<h1>${description}<h1>`
-            });
+            // const emailService = new EmailService();
+            // await emailService.sendEmail({
+            //     to:"joseluis.reyeschavez@gmail.com",
+            //     subject: title,
+            //     htmlBody: `<h1>${description}<h1>`
+            // });
             return res.json(newIncident);
         }
         catch (error) {
